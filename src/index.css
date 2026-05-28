@@ -1,0 +1,167 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --neon-green: #39FF14;
+    --electric-blue: #00F0FF;
+    --neon-purple: #BF00FF;
+    --dark-bg: #0A0A0F;
+    --card-bg: rgba(255, 255, 255, 0.05);
+  }
+
+  * {
+    @apply border-white/10;
+  }
+
+  body {
+    @apply bg-[#0A0A0F] text-white antialiased;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  }
+}
+
+@layer utilities {
+  .glassmorphism {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .neon-glow-green {
+    box-shadow: 0 0 20px rgba(57, 255, 20, 0.3), 0 0 40px rgba(57, 255, 20, 0.2);
+  }
+
+  .neon-glow-blue {
+    box-shadow: 0 0 20px rgba(0, 240, 255, 0.3), 0 0 40px rgba(0, 240, 255, 0.2);
+  }
+
+  .neon-glow-purple {
+    box-shadow: 0 0 20px rgba(191, 0, 255, 0.3), 0 0 40px rgba(191, 0, 255, 0.2);
+  }
+
+  .gradient-text {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-[#39FF14] via-[#00F0FF] to-[#BF00FF];
+  }
+
+  .gradient-border {
+    position: relative;
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      padding: 1px;
+      border-radius: inherit;
+      background: linear-gradient(135deg, #39FF14, #00F0FF, #BF00FF);
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+    }
+  }
+
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(57, 255, 20, 0.3) transparent;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background: rgba(57, 255, 20, 0.3);
+    border-radius: 3px;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+    background: rgba(57, 255, 20, 0.5);
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+  }
+
+  @keyframes pulse-glow {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+  }
+
+  @keyframes gradient-shift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .animate-pulse-glow {
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+
+  .animate-gradient {
+    background-size: 200% 200%;
+    animation: gradient-shift 3s ease infinite;
+  }
+}
+
+.hero-gradient {
+  background: radial-gradient(ellipse at top, rgba(57, 255, 20, 0.15) 0%, transparent 50%),
+              radial-gradient(ellipse at bottom right, rgba(0, 240, 255, 0.1) 0%, transparent 50%),
+              radial-gradient(ellipse at bottom left, rgba(191, 0, 255, 0.1) 0%, transparent 50%);
+}
+
+.card-hover {
+  transition: all 0.3s ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 0 30px rgba(57, 255, 20, 0.2);
+}
+
+.btn-primary {
+  @apply px-6 py-3 rounded-lg font-semibold transition-all duration-300;
+  background: linear-gradient(135deg, #39FF14 0%, #00F0FF 100%);
+}
+
+.btn-primary:hover {
+  @apply scale-105;
+  box-shadow: 0 0 30px rgba(57, 255, 20, 0.5);
+}
+
+.input-field {
+  @apply w-full px-4 py-3 rounded-lg bg-white/5 border border-white/10 text-white placeholder-gray-400
+         focus:outline-none focus:border-[#39FF14] focus:ring-1 focus:ring-[#39FF14]
+         transition-all duration-300;
+}
+
+.select-field {
+  @apply w-full px-4 py-3 rounded-lg bg-white/5 border border-white/10 text-white
+         focus:outline-none focus:border-[#39FF14] focus:ring-1 focus:ring-[#39FF14]
+         transition-all duration-300 cursor-pointer appearance-none;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23ffffff' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+  background-position: right 0.75rem center;
+  background-repeat: no-repeat;
+  background-size: 1.5em 1.5em;
+}
+
+.select-field option {
+  background: #0A0A0F;
+  color: white;
+}
+
+.textarea-field {
+  @apply w-full px-4 py-3 rounded-lg bg-white/5 border border-white/10 text-white
+         focus:outline-none focus:border-[#39FF14] focus:ring-1 focus:ring-[#39FF14]
+         transition-all duration-300 resize-none;
+}
